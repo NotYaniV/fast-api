@@ -1,5 +1,4 @@
 from ._client import get_collection
-from bson.objectid import ObjectId
 
 def _item_helper(item) -> dict:
     return {
@@ -18,7 +17,7 @@ item_collection = get_collection("item")
 async def get_all_items() -> list:
     return [_item_helper(item) async for item in  item_collection.find()]
 
-async def get_item_by_name(item_name: str) -> list:
+async def get_item_by_name(item_name: str) -> dict:
     item =  await item_collection.find_one({"item_name": item_name})
     if item:
         return _item_helper(item)
